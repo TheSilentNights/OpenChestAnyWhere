@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Record implements ICommand {
-    List<String> list = new ArrayList<>();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -21,24 +20,26 @@ public class Record implements ICommand {
             return true;
         }
 
+        if (strings.length == 0) {
+            MessageSender.send(new MessageToSingle("参数错误", commandSender));
+            return true;
+        }
+
+
 
         Player sender = (Player) commandSender;
-        PlayerOpenChestListener.players.put(sender.getName(), strings[1]);
+        PlayerOpenChestListener.players.put(sender.getName(), strings[0]);
+        MessageSender.send(new MessageToSingle("记录中", commandSender));
+        PlayerOpenChestListener.ifEnabled = true;
+
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        list.clear();
-        switch (strings.length){
-            case 1:
-                Collections.addAll(list,"enderchest","chest");
-                return list;
-            case 2:
-                list.add("[name]");
-                return list;
-            default:
-                return Collections.emptyList();
+        if (strings.length == 1) {
+            return Collections.singletonList("[name]");
         }
+        return Collections.emptyList();
     }
 }

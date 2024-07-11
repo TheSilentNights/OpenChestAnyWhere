@@ -12,7 +12,6 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class Open implements ICommand {
     List<String> list = new ArrayList<>();
