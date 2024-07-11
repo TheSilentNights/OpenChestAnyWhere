@@ -2,10 +2,10 @@ package com.thesilentnights.openchestanywhere.utils;
 
 import com.thesilentnights.openchestanywhere.OpenChestAnywhere;
 import com.thesilentnights.openchestanywhere.commands.ICommand;
-import com.thesilentnights.openchestanywhere.commands.Open;
 import com.thesilentnights.openchestanywhere.commands.Record;
 import com.thesilentnights.openchestanywhere.events.PlayerOpenChestListener;
 import org.bukkit.event.Listener;
+import com.thesilentnights.openchestanywhere.commands.Open;
 
 import java.util.ArrayList;
 import java.util.Collections;
