@@ -12,6 +12,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Open implements ICommand {
     List<String> list = new ArrayList<>();
@@ -46,10 +47,17 @@ public class Open implements ICommand {
                 }
                 sender.openInventory(target.getInventory());
                 return true;
+            case "enderchest":
+                Player target2 = OpenChestAnywhere.getInstance().getServer().getPlayer(strings[1]);
+                if (target2 == null) {
+                    MessageSender.send(new MessageToSingle("玩家不存在", commandSender));
+                    return true;
+                }
+                sender.openInventory(target2.getEnderChest());
+                return true;
             case "list":
                 ChestRepo.getInventories().keySet().forEach(key -> {
                     MessageSender.send(new MessageToSingle(key,sender));
-
                 });
             default:
                 MessageSender.send(new MessageToSingle("不存在该操作", commandSender));
@@ -62,7 +70,7 @@ public class Open implements ICommand {
         list.clear();
         switch (strings.length) {
             case 1:
-                Collections.addAll(list, "player", "recorded");
+                Collections.addAll(list, "player", "recorded","list","enderchest");
                 return list;
             case 2:
                 if (strings[0].equals("recorded")) {
