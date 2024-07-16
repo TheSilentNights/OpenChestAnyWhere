@@ -5,11 +5,9 @@ import com.thesilentnights.openchestanywhere.repo.Chest;
 import com.thesilentnights.openchestanywhere.repo.ChestRepo;
 import com.thesilentnights.openchestanywhere.utils.messageSender.MessageSender;
 import com.thesilentnights.openchestanywhere.utils.messageSender.messageImp.MessageToSingle;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.Collections;

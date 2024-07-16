@@ -24,7 +24,6 @@ public class Record implements ICommand {
             return true;
         }
 
-
         Player sender = (Player) commandSender;
         PlayerOpenChestListener.players.put(sender.getName(), strings[0]);
         MessageSender.send(new MessageToSingle("记录中", commandSender));
