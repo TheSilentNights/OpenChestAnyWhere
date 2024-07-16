@@ -18,12 +18,19 @@ public class Create implements ICommand {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         try {
-            boolean needOp = Boolean.parseBoolean(strings[2]); //permission
+            if (!strings[2].equals("true") && !strings[2].equals("false")) {
+                MessageSender.send(new MessageToSingle("权限格式错误", commandSender));
+                return true;
+            }
+
+            boolean needOp = Boolean.parseBoolean(strings[2]);
             int size = Integer.parseInt(strings[1]);
+
             if ((size % 9) != 0 || size < 9 || size > 54) {
                 MessageSender.send(new MessageToSingle("箱子的大小必须是满足 9<=size<=54 的9的倍数", commandSender));
                 return true;
             }
+
             ChestRepo.addInventory(
                     strings[0],
                     new Chest(strings[0], Bukkit.createInventory(null, Integer.parseInt(strings[1])), needOp)
@@ -32,7 +39,7 @@ public class Create implements ICommand {
             MessageSender.send(new MessageToSingle("成功创建了名为" + strings[0] + "的箱子", commandSender));
 
         } catch (NumberFormatException exception) {
-            MessageSender.send(new MessageToSingle("权限格式错误", commandSender));
+            MessageSender.send(new MessageToSingle("大小格式错误", commandSender));
 
         } catch (ArrayIndexOutOfBoundsException exception) {
             ChestRepo.addInventory(
