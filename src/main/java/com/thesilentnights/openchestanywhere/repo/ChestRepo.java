@@ -2,24 +2,26 @@ package com.thesilentnights.openchestanywhere.repo;
 
 import org.bukkit.inventory.Inventory;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ChestRepo {
-    private static final Map<String, Inventory> inventories;
+    private static final Map<String, Chest> inventories;
+
     static {
         inventories = new HashMap<>();
     }
 
-    public static void addInventory(String name,Inventory inventory){
-        inventories.put(name,inventory);
+    public static void addInventory(String name, Chest inventory) {
+        inventories.put(name, inventory);
     }
 
-    public static Inventory getInventory(String name){
+    public static Chest getInventory(String name) {
         return inventories.get(name);
     }
 
-    public static Map<String, Inventory> getInventories(){
+    public static Map<String, Chest> getInventories() {
         return inventories;
     }
+
+
 }

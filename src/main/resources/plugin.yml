@@ -2,15 +2,13 @@ name: OpenChestAnywhere
 version: '${project.version}'
 main: com.thesilentnights.openchestanywhere.OpenChestAnywhere
 api-version: '1.16'
-permissions:
-  permission.player:
-    true
-  permission.op:
-    op
 commands:
   open:
     description: none
     usage: none
   record:
+    description: none
+    usage: none
+  Create:
     description: none
     usage: none

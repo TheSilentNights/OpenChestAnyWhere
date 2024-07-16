@@ -1,5 +1,6 @@
 package com.thesilentnights.openchestanywhere.events;
 
+import com.thesilentnights.openchestanywhere.repo.Chest;
 import com.thesilentnights.openchestanywhere.repo.ChestRepo;
 import com.thesilentnights.openchestanywhere.utils.messageSender.MessageSender;
 import com.thesilentnights.openchestanywhere.utils.messageSender.messageImp.MessageToSingle;
@@ -20,13 +21,14 @@ public class PlayerOpenChestListener implements Listener {
             return;
         }
         if (event.getInventory().getType().equals(InventoryType.CHEST) && players.containsKey(event.getPlayer().getName())) {
-            ChestRepo.addInventory(players.get(event.getPlayer().getName()), event.getInventory());
+            ChestRepo.addInventory(players.get(event.getPlayer().getName()), new Chest(
+                    players.get(event.getPlayer().getName()),
+                    event.getInventory()
+            ));
         }
         MessageSender.send(new MessageToSingle("已将该inventory标记为:" + players.get(event.getPlayer().getName()), event.getPlayer()));
         players.remove(event.getPlayer().getName());
         MessageSender.send(new MessageToSingle("记录结束", event.getPlayer()));
-
-
         ifEnabled = false;
     }
 }

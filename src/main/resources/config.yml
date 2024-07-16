@@ -1,1 +1,1 @@
-open-chest-max_distance: 20 #require integer Important! may cause chunk load
+open-chest-max_distance: 20 #useless config

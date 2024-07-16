@@ -12,6 +12,7 @@ buildNumber.properties
 # Default ignored files
 .idea/shelf/
 .idea/workspace.xml
+.idea/uiDesigner.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files

@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Config {
@@ -39,9 +40,10 @@ public class Config {
         return this.configAccess.getBoolean(key);
     }
 
-    public Integer readInt(String key){
+    public Integer readInt(String key) {
         return this.configAccess.getInt(key);
     }
+
 
 
 }

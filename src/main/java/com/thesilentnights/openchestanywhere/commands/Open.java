@@ -1,9 +1,11 @@
 package com.thesilentnights.openchestanywhere.commands;
 
 import com.thesilentnights.openchestanywhere.OpenChestAnywhere;
+import com.thesilentnights.openchestanywhere.repo.Chest;
 import com.thesilentnights.openchestanywhere.repo.ChestRepo;
 import com.thesilentnights.openchestanywhere.utils.messageSender.MessageSender;
 import com.thesilentnights.openchestanywhere.utils.messageSender.messageImp.MessageToSingle;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,13 +33,20 @@ public class Open implements ICommand {
         Player sender = (Player) commandSender;
         switch (strings[0]) {
             case "recorded":
-                Inventory inventory = ChestRepo.getInventory(strings[1]);
-                if (inventory != null) {
-                    sender.openInventory(inventory);
-                } else {
+                Chest inventory = ChestRepo.getInventory(strings[1]);
+                if (inventory == null) {
                     MessageSender.send(new MessageToSingle("该箱子不存在或未被标记", sender));
+                    return true;
                 }
+
+                if (inventory.getAccessPermission()/*true时判断玩家权限*/ && !sender.isOp()) {
+                    MessageSender.send(new MessageToSingle("你没有权限打开这个inventory", commandSender));
+                    return true;
+                }
+
+                sender.openInventory(inventory.getInventory());
                 return true;
+
             case "player":
                 Player target = OpenChestAnywhere.getInstance().getServer().getPlayer(strings[1]);
                 if (target == null) {
@@ -46,6 +55,7 @@ public class Open implements ICommand {
                 }
                 sender.openInventory(target.getInventory());
                 return true;
+
             case "enderchest":
                 Player target2 = OpenChestAnywhere.getInstance().getServer().getPlayer(strings[1]);
                 if (target2 == null) {
@@ -54,10 +64,12 @@ public class Open implements ICommand {
                 }
                 sender.openInventory(target2.getEnderChest());
                 return true;
+
             case "list":
                 ChestRepo.getInventories().keySet().forEach(key -> {
-                    MessageSender.send(new MessageToSingle(key,sender));
+                    MessageSender.send(new MessageToSingle(key, sender));
                 });
+                return true;
             default:
                 MessageSender.send(new MessageToSingle("不存在该操作", commandSender));
                 return true;
@@ -69,7 +81,7 @@ public class Open implements ICommand {
         list.clear();
         switch (strings.length) {
             case 1:
-                Collections.addAll(list, "player", "recorded","list","enderchest");
+                Collections.addAll(list, "player", "recorded", "list", "enderchest");
                 return list;
             case 2:
                 if (strings[0].equals("recorded")) {

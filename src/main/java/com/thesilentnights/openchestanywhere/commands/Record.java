@@ -7,7 +7,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +23,6 @@ public class Record implements ICommand {
             MessageSender.send(new MessageToSingle("参数错误", commandSender));
             return true;
         }
-
 
 
         Player sender = (Player) commandSender;
